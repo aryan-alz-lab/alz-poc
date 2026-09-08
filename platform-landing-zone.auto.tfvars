@@ -137,19 +137,21 @@ management_group_settings = {
     resource_group_location                     = "$${starter_location_01}"
     email_security_contact                      = "$${defender_email_security_contact}"
     /*
-    # Example of allowed locations for Sovereign Landing Zones policies
+    # Allowed locations for Sovereign Landing Zone L1 controls
     allowed_locations = [
-      "$${starter_location_01}"
+    "$${starter_location_01}"
     ]
     */
   }
   subscription_placement = {
-  management = {
-    subscription_id       = "$${subscription_id_management}"
-    management_group_name = "management"
+    management = {
+      subscription_id       = "$${subscription_id_management}"
+      management_group_name = "management"
+    }
   }
-}
   policy_assignments_to_modify = {
+
+    # Existing Defender configuration
     alz = {
       policy_assignments = {
         Deploy-MDFC-Config-H224 = {
@@ -170,13 +172,83 @@ management_group_settings = {
         }
       }
     }
-    connectivity = {
+
+    # L2 sovereign controls - deployed but not enforced
+    management = {
       policy_assignments = {
-        Enable-DDoS-VNET = {
-          creation_enabled = false
+        Enforce-Sov-L2-CMKM = {
+          enforcement_mode = "DoNotEnforce"
+        }
+        Enforce-Sov-L2-CMKP = {
+          enforcement_mode = "DoNotEnforce"
+        }
+        Enforce-Sov-L2-HTTPS = {
+          enforcement_mode = "DoNotEnforce"
+        }
+        Enforce-Sov-L2-TLS = {
+          enforcement_mode = "DoNotEnforce"
         }
       }
     }
+
+    connectivity = {
+      policy_assignments = {
+
+        # Existing POC connectivity customization
+        Enable-DDoS-VNET = {
+          creation_enabled = false
+        }
+
+        Enforce-Sov-L2-CMKM = {
+          enforcement_mode = "DoNotEnforce"
+        }
+        Enforce-Sov-L2-CMKP = {
+          enforcement_mode = "DoNotEnforce"
+        }
+        Enforce-Sov-L2-HTTPS = {
+          enforcement_mode = "DoNotEnforce"
+        }
+        Enforce-Sov-L2-TLS = {
+          enforcement_mode = "DoNotEnforce"
+        }
+      }
+    }
+
+    identity = {
+      policy_assignments = {
+        Enforce-Sov-L2-CMKM = {
+          enforcement_mode = "DoNotEnforce"
+        }
+        Enforce-Sov-L2-CMKP = {
+          enforcement_mode = "DoNotEnforce"
+        }
+        Enforce-Sov-L2-HTTPS = {
+          enforcement_mode = "DoNotEnforce"
+        }
+        Enforce-Sov-L2-TLS = {
+          enforcement_mode = "DoNotEnforce"
+        }
+      }
+    }
+
+    security = {
+      policy_assignments = {
+        Enforce-Sov-L2-CMKM = {
+          enforcement_mode = "DoNotEnforce"
+        }
+        Enforce-Sov-L2-CMKP = {
+          enforcement_mode = "DoNotEnforce"
+        }
+        Enforce-Sov-L2-HTTPS = {
+          enforcement_mode = "DoNotEnforce"
+        }
+        Enforce-Sov-L2-TLS = {
+          enforcement_mode = "DoNotEnforce"
+        }
+      }
+    }
+
+    # Existing POC landing-zone customization
     landingzones = {
       policy_assignments = {
         Enable-DDoS-VNET = {
@@ -184,10 +256,85 @@ management_group_settings = {
         }
       }
     }
+
     corp = {
       policy_assignments = {
+
+        # Existing POC DNS customization
         Deploy-Private-DNS-Zones = {
           creation_enabled = false
+        }
+
+        Enforce-Sov-L2-CMKM = {
+          enforcement_mode = "DoNotEnforce"
+        }
+        Enforce-Sov-L2-CMKP = {
+          enforcement_mode = "DoNotEnforce"
+        }
+        Enforce-Sov-L2-HTTPS = {
+          enforcement_mode = "DoNotEnforce"
+        }
+        Enforce-Sov-L2-TLS = {
+          enforcement_mode = "DoNotEnforce"
+        }
+      }
+    }
+
+    online = {
+      policy_assignments = {
+        Enforce-Sov-L2-CMKM = {
+          enforcement_mode = "DoNotEnforce"
+        }
+        Enforce-Sov-L2-CMKP = {
+          enforcement_mode = "DoNotEnforce"
+        }
+        Enforce-Sov-L2-HTTPS = {
+          enforcement_mode = "DoNotEnforce"
+        }
+        Enforce-Sov-L2-TLS = {
+          enforcement_mode = "DoNotEnforce"
+        }
+      }
+    }
+
+    # Confidential Corp gets both L2 and L3
+    "confidential-corp" = {
+      policy_assignments = {
+        Enforce-Sov-L2-CMKM = {
+          enforcement_mode = "DoNotEnforce"
+        }
+        Enforce-Sov-L2-CMKP = {
+          enforcement_mode = "DoNotEnforce"
+        }
+        Enforce-Sov-L2-HTTPS = {
+          enforcement_mode = "DoNotEnforce"
+        }
+        Enforce-Sov-L2-TLS = {
+          enforcement_mode = "DoNotEnforce"
+        }
+        Enforce-Sov-L3-Conf = {
+          enforcement_mode = "DoNotEnforce"
+        }
+      }
+    }
+
+    # Confidential Online gets both L2 and L3
+    "confidential-online" = {
+      policy_assignments = {
+        Enforce-Sov-L2-CMKM = {
+          enforcement_mode = "DoNotEnforce"
+        }
+        Enforce-Sov-L2-CMKP = {
+          enforcement_mode = "DoNotEnforce"
+        }
+        Enforce-Sov-L2-HTTPS = {
+          enforcement_mode = "DoNotEnforce"
+        }
+        Enforce-Sov-L2-TLS = {
+          enforcement_mode = "DoNotEnforce"
+        }
+        Enforce-Sov-L3-Conf = {
+          enforcement_mode = "DoNotEnforce"
         }
       }
     }
